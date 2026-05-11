@@ -39,6 +39,10 @@ public class CentroGrafo {
      * 1. Para cada nodo, encontrar la distancia máxima hacia otros nodos
      * 2. Elegir el nodo cuya distancia máxima sea la menor
      *
+     * IMPORTANTE:
+     * Solo se consideran como candidatos aquellos nodos que pueden
+     * alcanzar a todos los demás (es decir, que no tienen distancias infinitas).
+     *
      * @return nombre de la ciudad que representa el centro del grafo,
      *         o null si no se puede determinar
      */
@@ -51,15 +55,23 @@ public class CentroGrafo {
         for (int i = 0; i < n; i++) {
 
             double maxDist = 0;
+            boolean conectado = true;
 
             for (int j = 0; j < n; j++) {
-                // 🔥 ignoramos caminos inexistentes
-                if (dist[i][j] != INF && dist[i][j] > maxDist) {
+
+                // Si hay un nodo no alcanzable, este no puede ser centro
+                if (dist[i][j] == INF) {
+                    conectado = false;
+                    break;
+                }
+
+                if (dist[i][j] > maxDist) {
                     maxDist = dist[i][j];
                 }
             }
 
-            if (maxDist < minExcentricidad) {
+            // Solo se consideram nodos completamente conectados
+            if (conectado && maxDist < minExcentricidad) {
                 minExcentricidad = maxDist;
                 indiceCentro = i;
             }

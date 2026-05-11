@@ -4,8 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Implementación del algoritmo de Floyd-Warshall
- * para encontrar rutas más cortas entre todos los pares de nodos.
+ * Implementación del algoritmo de Floyd-Warshall para calcular
+ * las rutas más cortas entre todos los pares de nodos en un grafo dirigido.
+ *
+ * Este algoritmo permite obtener:
+ * - La distancia mínima entre cualquier par de ciudades
+ * - La ruta (camino) más corto entre ellas
+ *
+ * Utiliza:
+ * - Una matriz de distancias (dist)
+ * - Una matriz auxiliar (next) para reconstruir rutas
+ *
+ * Autor: Kenett Ortega
+ * Carnet: 25777
+ * Universidad del Valle de Guatemala
  */
 public class Floyd {
 
@@ -15,6 +27,14 @@ public class Floyd {
 
     private static final double INF = Double.POSITIVE_INFINITY;
 
+    /**
+     * Constructor que recibe un grafo y ejecuta el algoritmo de Floyd.
+     *
+     * Inicializa las matrices de distancias y rutas,
+     * y luego ejecuta el algoritmo principal.
+     *
+     * @param grafo grafo sobre el cual se calcularán las rutas más cortas
+     */
     public Floyd(Grafo grafo) {
         this.ciudades = grafo.getCiudades();
 
@@ -24,7 +44,7 @@ public class Floyd {
 
         double[][] matriz = grafo.getMatriz();
 
-        // Inicialización
+        // Inicialización de matrices
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 dist[i][j] = matriz[i][j];
@@ -41,7 +61,10 @@ public class Floyd {
     }
 
     /**
-     * Algoritmo principal de Floyd-Warshall
+     * Implementación del algoritmo de Floyd-Warshall.
+     *
+     * Actualiza la matriz de distancias mínimas considerando
+     * todos los posibles nodos intermedios.
      */
     private void floydWarshall() {
         int n = dist.length;
@@ -62,7 +85,12 @@ public class Floyd {
     }
 
     /**
-     * Retorna la distancia mínima entre dos ciudades
+     * Retorna la distancia mínima entre dos ciudades.
+     *
+     * @param origen nombre de la ciudad de origen
+     * @param destino nombre de la ciudad destino
+     * @return distancia mínima entre origen y destino,
+     *         o infinito si no existe camino
      */
     public double getDistancia(String origen, String destino) {
         int i = ciudades.indexOf(origen);
@@ -74,7 +102,12 @@ public class Floyd {
     }
 
     /**
-     * Reconstruye la ruta más corta entre dos ciudades
+     * Reconstruye la ruta más corta entre dos ciudades.
+     *
+     * @param origen ciudad de origen
+     * @param destino ciudad destino
+     * @return lista de ciudades que representan la ruta más corta,
+     *         o null si no existe camino
      */
     public List<String> getRuta(String origen, String destino) {
         int i = ciudades.indexOf(origen);
@@ -96,20 +129,20 @@ public class Floyd {
     }
 
     /**
-     * Imprime la matriz de distancias (debug)
+     * Retorna la matriz de distancias mínimas calculadas.
+     *
+     * @return matriz de distancias
      */
-    public void imprimirDistancias() {
-        int n = dist.length;
+    public double[][] getDist() {
+        return dist;
+    }
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (dist[i][j] == INF) {
-                    System.out.print("INF ");
-                } else {
-                    System.out.print(dist[i][j] + " ");
-                }
-            }
-            System.out.println();
-        }
+    /**
+     * Retorna la lista de ciudades del grafo.
+     *
+     * @return lista de ciudades
+     */
+    public ArrayList<String> getCiudades() {
+        return ciudades;
     }
 }

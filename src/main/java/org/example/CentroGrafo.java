@@ -3,8 +3,17 @@ package org.example;
 import java.util.ArrayList;
 
 /**
- * Clase para calcular el centro del grafo usando
- * la matriz de distancias obtenida con Floyd.
+ * Clase encargada de calcular el centro de un grafo dirigido.
+ *
+ * El centro del grafo es el nodo cuya distancia máxima hacia
+ * todos los demás nodos es la menor posible.
+ *
+ * Se basa en la matriz de distancias obtenida mediante
+ * el algoritmo de Floyd-Warshall.
+ *
+ * Autor: Kenett Ortega
+ * Carnet: 25777
+ * Universidad del Valle de Guatemala
  */
 public class CentroGrafo {
 
@@ -13,15 +22,25 @@ public class CentroGrafo {
 
     private static final double INF = Double.POSITIVE_INFINITY;
 
+    /**
+     * Constructor que recibe un objeto Floyd con las distancias calculadas.
+     *
+     * @param floyd objeto que contiene la matriz de distancias mínimas
+     */
     public CentroGrafo(Floyd floyd) {
-        this.dist = floyd.dist; // usamos la matriz ya calculada
-        this.ciudades = floyd.ciudades;
+        this.dist = floyd.getDist();
+        this.ciudades = floyd.getCiudades();
     }
 
     /**
      * Calcula el centro del grafo.
      *
-     * @return nombre de la ciudad centro
+     * El proceso consiste en:
+     * 1. Para cada nodo, encontrar la distancia máxima hacia otros nodos
+     * 2. Elegir el nodo cuya distancia máxima sea la menor
+     *
+     * @return nombre de la ciudad que representa el centro del grafo,
+     *         o null si no se puede determinar
      */
     public String calcularCentro() {
         int n = dist.length;
@@ -34,7 +53,8 @@ public class CentroGrafo {
             double maxDist = 0;
 
             for (int j = 0; j < n; j++) {
-                if (dist[i][j] > maxDist) {
+                // 🔥 ignoramos caminos inexistentes
+                if (dist[i][j] != INF && dist[i][j] > maxDist) {
                     maxDist = dist[i][j];
                 }
             }

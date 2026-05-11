@@ -4,8 +4,22 @@ import org.example.CentroGrafo;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Pruebas unitarias para la clase CentroGrafo.
+ *
+ * Verifica que el algoritmo identifique correctamente
+ * el centro del grafo según las distancias calculadas.
+ *
+ * Autor: Kenett Ortega
+ * Carnet: 25777
+ * Universidad del Valle de Guatemala
+ */
 public class CentroGrafoTest {
 
+    /**
+     * Prueba que el centro del grafo se calcule correctamente
+     * en un grafo simple.
+     */
     @Test
     void testCentro() {
         Grafo g = new Grafo();
@@ -19,6 +33,7 @@ public class CentroGrafoTest {
 
         String centro = c.calcularCentro();
 
-        assertNotNull(centro);
+        // 🔥 Validación fuerte
+        assertEquals("B", centro);
     }
 }

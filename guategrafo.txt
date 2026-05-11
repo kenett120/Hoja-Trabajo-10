@@ -1,0 +1,16 @@
+Guatemala Mixco 10
+Mixco Antigua 30
+Antigua Escuintla 25
+Escuintla SantaLucia 15
+SantaLucia Mazatenango 20
+Mazatenango Retalhuleu 10
+Retalhuleu Coatepeque 18
+Coatepeque Quetzaltenango 12
+Quetzaltenango Totonicapan 8
+Totonicapan Huehuetenango 35
+Huehuetenango Coban 60
+Coban Guatemala 120
+Guatemala Jalapa 90
+Jalapa Jutiapa 40
+Jutiapa SantaRosa 50
+SantaRosa Escuintla 70
